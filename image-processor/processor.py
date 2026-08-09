@@ -84,6 +84,8 @@ def write_config_atomic(config_path: Path, entries: list[dict[str, Any]]) -> Non
         text=True,
     )
 
+    os.chmod(temp_name, 0o644)
+
     try:
         with os.fdopen(fd, "w", encoding="utf-8") as f:
             json.dump(entries, f, indent=2, ensure_ascii=False)
