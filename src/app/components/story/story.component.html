@@ -1,0 +1,28 @@
+<section class="story">
+  <div class="groups" *ngIf="groups$ | async as groups">
+    <article class="group" *ngFor="let g of groups">
+      <button class="group-button" (click)="openViewer(g)">
+        <img [src]="getImageUrl(g.preview)" [alt]="g.category" />
+        <div class="category">{{ g.category }}</div>
+      </button>
+    </article>
+  </div>
+
+  <div class="viewer" *ngIf="viewerOpen">
+    <button class="close" (click)="closeViewer()">✕</button>
+
+    <div class="viewer-content">
+      <button class="nav prev" (click)="prev()">‹</button>
+
+      <div class="image-slot">
+        <img
+          *ngIf="viewerImages.length"
+          [src]="getImageUrl(viewerImages[viewerIndex])"
+          [alt]="viewerImages[viewerIndex]?.category"
+        />
+      </div>
+
+      <button class="nav next" (click)="next()">›</button>
+    </div>
+  </div>
+</section>

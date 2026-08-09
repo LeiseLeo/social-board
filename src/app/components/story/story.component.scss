@@ -1,0 +1,64 @@
+.story {
+}
+.groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.group {
+  width: 120px;
+}
+.group-button {
+  display: block;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+.group-button img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.category {
+  text-align: center;
+  margin-top: 6px;
+  font-size: 12px;
+}
+.viewer {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+.viewer-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.image-slot img {
+  max-width: 80vw;
+  max-height: 80vh;
+  object-fit: contain;
+}
+.nav {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 48px;
+  cursor: pointer;
+}
+.close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+}

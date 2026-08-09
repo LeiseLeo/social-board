@@ -1,0 +1,12 @@
+<section class="profile">
+  <div class="profile-main">
+    <ng-container *ngIf="profile$ | async as profile">
+      <img class="profile-picture" [src]="profile.profilePicture" [alt]="profile.username" />
+      <h1>{{ profile.username }}</h1>
+    </ng-container>
+  </div>
+
+  <!-- <div class="profile-actions">
+    <button class="follow-button">FOLLOW</button>
+  </div> -->
+</section>

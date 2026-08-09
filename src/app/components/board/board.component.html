@@ -1,0 +1,50 @@
+<section class="board">
+  <ng-container *ngIf="images$ | async as images">
+    <article
+      class="image-wrapper"
+      *ngFor="let image of images; let i = index; trackBy: trackByName"
+    >
+      <img
+        class="board-image"
+        [src]="imageService.getImageUrl(image, 800)"
+        [srcset]="
+          imageService.getImageUrl(image, 400) +
+          ' 400w, ' +
+          imageService.getImageUrl(image, 800) +
+          ' 800w, ' +
+          imageService.getImageUrl(image, 1200) +
+          ' 1200w'
+        "
+        sizes="(max-width: 600px) 100vw, 50vw"
+        [alt]="image.category"
+        loading="lazy"
+        (click)="openViewer(images, i)"
+      />
+    </article>
+
+    <div class="viewer" *ngIf="viewerOpen" (click)="closeViewer()">
+      <button class="close" (click)="closeViewer(); $event.stopPropagation()" aria-label="Close">
+        ×
+      </button>
+
+      <div class="viewer-content" (click)="$event.stopPropagation()">
+        <button class="nav prev" (click)="prev()" aria-label="Previous image">‹</button>
+
+        <div class="image-slot">
+          <img
+            *ngIf="viewerImages.length"
+            [src]="imageService.getImageUrl(viewerImages[viewerIndex], 1200)"
+            [alt]="viewerImages[viewerIndex].category"
+          />
+
+          <div class="meta" *ngIf="viewerImages.length">
+            <span class="category">{{ viewerImages[viewerIndex].category }}</span>
+            <span class="date">{{ viewerImages[viewerIndex].date }}</span>
+          </div>
+        </div>
+
+        <button class="nav next" (click)="next()" aria-label="Next image">›</button>
+      </div>
+    </div>
+  </ng-container>
+</section>

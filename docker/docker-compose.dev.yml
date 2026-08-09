@@ -1,0 +1,26 @@
+services:
+  image-processor:
+    build:
+      context: ../image-processor
+      dockerfile: Dockerfile
+
+    volumes:
+      - ../images:/images
+
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+
+    ports:
+      - '8080:80'
+
+    volumes:
+      - ../images/generated:/usr/share/nginx/html/images:ro
+
+    depends_on:
+      - image-processor
+
+    restart: unless-stopped

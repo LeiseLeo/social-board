@@ -1,0 +1,51 @@
+.tabs {
+  display: flex;
+  align-items: flex-end;
+
+  height: 54px;
+
+  border-bottom: 1px solid #dedede;
+
+  margin-bottom: 30px;
+}
+
+.tabs button {
+  position: relative;
+
+  height: 54px;
+
+  padding: 0 18px;
+
+  border: none;
+  background: none;
+
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  color: #777;
+
+  cursor: pointer;
+}
+
+.tabs button:first-child {
+  padding-left: 0;
+}
+
+.tabs button.active {
+  color: #000;
+}
+
+.tabs button.active::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: -1px;
+
+  height: 2px;
+
+  background: #000;
+}

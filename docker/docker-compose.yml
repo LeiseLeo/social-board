@@ -1,0 +1,17 @@
+services:
+  image-board:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+
+    ports:
+      - '8080:80'
+
+    volumes:
+      # Actual images
+      - ./images:/usr/share/nginx/html/images:ro
+
+      # Configuration
+      - ./images.config.json:/usr/share/nginx/html/images.config.json:ro
+
+    restart: unless-stopped

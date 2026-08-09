@@ -1,0 +1,19 @@
+<app-header />
+
+<main class="page">
+  <app-profile />
+
+  <app-tabs [activeTab]="activeTab" (tabChange)="setActiveTab($event)" />
+
+  @if (activeTab === 'board') {
+    <app-board />
+  }
+
+  @if (activeTab === 'story') {
+    <app-story />
+  }
+
+  <!-- @if (activeTab === 'timeline') {
+    <div class="placeholder">Timeline</div>
+  } -->
+</main>
