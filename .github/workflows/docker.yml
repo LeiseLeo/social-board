@@ -60,8 +60,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ env.IMAGE_PREFIX }}:latest
-            ghcr.io/${{ env.IMAGE_PREFIX }}:${{ github.sha }}
+            ghcr.io/leiseleo/social-board:latest
+            ghcr.io/leiseleo/social-board:${{ github.sha }}
 
       # --------------------------------------------------
       # Build and push image processor
@@ -74,5 +74,5 @@ jobs:
           file: ./image-processor/Dockerfile
           push: true
           tags: |
-            ghcr.io/${{ env.IMAGE_PREFIX }}-processor:latest
-            ghcr.io/${{ env.IMAGE_PREFIX }}-processor:${{ github.sha }}
+            ghcr.io/leiseleo/social-board-processor:latest
+            ghcr.io/leiseleo/social-board-processor:${{ github.sha }}
