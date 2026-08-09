@@ -1,0 +1,78 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: ${{ github.repository_owner }}/image-board
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # --------------------------------------------------
+      # Build Angular application
+      # --------------------------------------------------
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install Angular dependencies
+        run: npm ci
+
+      - name: Build Angular application
+        run: npm run build -- --configuration production
+
+      # --------------------------------------------------
+      # Build and push Angular/nginx image
+      # --------------------------------------------------
+
+      - name: Build and push web image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ env.IMAGE_PREFIX }}:latest
+            ghcr.io/${{ env.IMAGE_PREFIX }}:${{ github.sha }}
+
+      # --------------------------------------------------
+      # Build and push image processor
+      # --------------------------------------------------
+
+      - name: Build and push image processor
+        uses: docker/build-push-action@v6
+        with:
+          context: ./image-processor
+          file: ./image-processor/Dockerfile
+          push: true
+          tags: |
+            ghcr.io/${{ env.IMAGE_PREFIX }}-processor:latest
+            ghcr.io/${{ env.IMAGE_PREFIX }}-processor:${{ github.sha }}
