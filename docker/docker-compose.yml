@@ -1,17 +1,22 @@
 services:
-  image-board:
-    build:
-      context: ..
-      dockerfile: Dockerfile
-
-    ports:
-      - '8080:80'
+  image-processor:
+    image: ghcr.io/LeiseLeo/social-board-processor:latest
 
     volumes:
-      # Actual images
-      - ./images:/usr/share/nginx/html/images:ro
+      - ./images:/images
 
-      # Configuration
-      - ./images.config.json:/usr/share/nginx/html/images.config.json:ro
+    restart: unless-stopped
+
+  web:
+    image: ghcr.io/LeiseLeo/social-board:latest
+
+    ports:
+      - '127.0.0.1:8080:80'
+
+    volumes:
+      - ./images/generated:/usr/share/nginx/html/images:ro
+
+    depends_on:
+      - image-processor
 
     restart: unless-stopped

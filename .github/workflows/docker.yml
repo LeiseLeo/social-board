@@ -9,7 +9,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_PREFIX: ${{ github.repository_owner }}/image-board
+  IMAGE_PREFIX: ${{ github.repository_owner }}/social-board
 
 jobs:
   build:

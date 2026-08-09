@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "image-board": {
+    "social-board": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -60,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "image-board:build:production"
+              "buildTarget": "social-board:build:production"
             },
             "development": {
-              "buildTarget": "image-board:build:development"
+              "buildTarget": "social-board:build:development"
             }
           },
           "defaultConfiguration": "development"
