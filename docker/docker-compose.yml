@@ -1,6 +1,6 @@
 services:
   image-processor:
-    image: ghcr.io/LeiseLeo/social-board-processor:latest
+    image: ghcr.io/leiseleo/social-board-processor:latest
 
     volumes:
       - ./images:/images
@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
 
   web:
-    image: ghcr.io/LeiseLeo/social-board:latest
+    image: ghcr.io/leiseleo/social-board:latest
 
     ports:
       - '127.0.0.1:8080:80'

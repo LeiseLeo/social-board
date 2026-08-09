@@ -8,4 +8,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY processor.py .
 
-CMD ["python", "/app/processor.py", "--input", "/images/images", "--output", "/images/generated"]
+CMD ["python", "/app/processor.py", "--input", "/images/original", "--output", "/images/generated"]

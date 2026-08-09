@@ -3,6 +3,6 @@ export const environment = {
 
   imagesConfigUrl: '/images/images.config.json',
   imagesBaseUrl: '/images',
-  profileImageBaseUrl: '/',
-  profileConfigUrl: '/profile.config.json',
+  profileImageBaseUrl: '/images',
+  profileConfigUrl: '/images/profile.config.json',
 };
