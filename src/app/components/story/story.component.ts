@@ -21,8 +21,9 @@ export class StoryComponent {
 
   public groups$: Observable<CategoryGroup[]> = this.imageService.getImages().pipe(
     map((images) => {
+      const storyImages = this.imageService.getStoryImages(images);
       const map = new Map<string, ImageConfig[]>();
-      for (const img of images) {
+      for (const img of storyImages) {
         const list = map.get(img.category) || [];
         list.push(img);
         map.set(img.category, list);

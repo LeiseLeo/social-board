@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
-import { ImageConfig } from '../../models/image.model';
+import { Observable, map } from 'rxjs';
+import { ImageConfig } from '../../services/image.service';
 import { ImageService } from '../../services/image.service';
 
 @Component({
@@ -14,7 +14,9 @@ import { ImageService } from '../../services/image.service';
 export class BoardComponent {
   public imageService = inject(ImageService);
 
-  public images$: Observable<ImageConfig[]> = this.imageService.getImages();
+  public images$: Observable<ImageConfig[]> = this.imageService
+    .getImages()
+    .pipe(map((images) => this.imageService.sortImages(images)));
   public viewerOpen = false;
   public viewerImages: ImageConfig[] = [];
   public viewerIndex = 0;
